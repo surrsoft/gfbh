@@ -43,4 +43,13 @@ object U {
     return i
   }
 
+  fun exAsString(e: Throwable?): String {
+    var st = "null"
+    if (e != null) {
+      st = "${e::class.qualifiedName} : ${e.message}";
+    }
+    return "ERR*: $st"
+  }
+
+
 }

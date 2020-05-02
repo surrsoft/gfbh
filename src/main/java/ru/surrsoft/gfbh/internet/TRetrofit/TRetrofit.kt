@@ -2,6 +2,7 @@ package ru.surrsoft.gfbh.internet.TRetrofit
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
 /**
@@ -17,6 +18,17 @@ object TRetrofit {
     return Retrofit.Builder()
       .baseUrl(baseURL)
       .addConverterFactory(ScalarsConverterFactory.create())
+      .client(OkHttpClient())
+      .build()
+  }
+
+  /**
+   * For convert result to "Object" through JSON
+   */
+  fun buildB(baseURL: String): Retrofit {
+    return Retrofit.Builder()
+      .baseUrl(baseURL)
+      .addConverterFactory(GsonConverterFactory.create())
       .client(OkHttpClient())
       .build()
   }

@@ -4,6 +4,7 @@ import android.util.Log
 import okhttp3.*
 import ru.surrsoft.gfbh.internet.top.EResultConst
 import ru.surrsoft.gfbh.internet.top.HttpRequestResult
+import ru.surrsoft.gfbh.other.U
 import java.io.IOException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -57,7 +58,7 @@ object TOkHttp {
 
           override fun onFailure(call: Call, e: IOException) {
             val r = HttpRequestResult(
-              exMessage = mtExceptionAsString(e)
+              exMessage = U.exAsString(e)
             )
             // ---
             when (e::class.java) {
@@ -72,16 +73,10 @@ object TOkHttp {
         })
     } catch (e: Exception) {
       val result = HttpRequestResult(
-        exMessage = mtExceptionAsString(e)
+        exMessage = U.exAsString(e)
       )
       cb(result)
     }
   }
-
-  // --- private
-
-  private fun mtExceptionAsString(e: java.lang.Exception) =
-    "ERR*: ${e::class.qualifiedName} : ${e.message}"
-
 
 }
