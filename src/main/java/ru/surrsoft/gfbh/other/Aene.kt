@@ -6,6 +6,7 @@ import android.content.res.AssetManager
 import android.content.res.Resources
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jakewharton.threetenabp.AndroidThreeTen
 
 /**
  * Аналог {bysa}.
@@ -14,6 +15,7 @@ import com.google.gson.GsonBuilder
  * //new//
  */
 object Aene {
+  var projectNameForLog = "@dfl@"
   var assets: AssetManager? = null
   var confLanguagesList: Array<String> = arrayOf()
   var gsonPretty: Gson? = null
@@ -34,5 +36,7 @@ object Aene {
     gson = Gson()
     gsonPretty = GsonBuilder().setPrettyPrinting().create()
     confLanguagesList = arrayOf("en", "ru")
+    // --- {ru} инициализация временнЫх зон библиотеки работы со временем "ThreeTenABP"
+    AndroidThreeTen.init(appContext)
   }
 }

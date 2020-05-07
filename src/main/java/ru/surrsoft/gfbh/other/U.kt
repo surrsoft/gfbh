@@ -3,7 +3,7 @@ package ru.surrsoft.gfbh.other
 import kotlin.math.roundToInt
 
 /**
- * Universal functions
+ * Universal functions without depends on Android
  */
 object U {
   /**
@@ -50,6 +50,5 @@ object U {
     }
     return "ERR*: $st"
   }
-
 
 }

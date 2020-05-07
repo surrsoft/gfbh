@@ -1,9 +1,8 @@
 package ru.surrsoft.gfbh.internet.TOkHttp
 
-import android.util.Log
 import okhttp3.*
 import ru.surrsoft.gfbh.internet.top.EResultConst
-import ru.surrsoft.gfbh.internet.top.HttpRequestResult
+import ru.surrsoft.gfbh.internet.top.HttpResult
 import ru.surrsoft.gfbh.other.U
 import java.io.IOException
 import java.net.ConnectException
@@ -23,7 +22,7 @@ object TOkHttp {
    * @param url example 'https://yandex.ru?param=1'
    * @param cb callback to result; performs on UI thread
    */
-  fun requestAsync(url: String, cb: (HttpRequestResult) -> Unit) {
+  fun requestAsync(url: String, cb: (HttpResult) -> Unit) {
     try {
       // --- req
       val req = Request.Builder()
@@ -38,7 +37,7 @@ object TOkHttp {
           override fun onResponse(call: Call, response: Response) {
             // ---
             val r =
-              HttpRequestResult(httpCode = response.code(), url = url)
+              HttpResult(httpCode = response.code(), url = url)
             // --- body
             try {
               val body = response.body()
@@ -47,17 +46,16 @@ object TOkHttp {
               r.resultConst = EResultConst.ERR_BODY
             }
             // --- resultConst
-            val code = response.code()
-            when {
-              code == 200 -> r.resultConst = EResultConst.OK
-              code != 200 -> r.resultConst = EResultConst.KO
+            when (response.code()) {
+              in 200..299 -> r.resultConst = EResultConst.OK
+              else -> r.resultConst = EResultConst.KO
             }
             // ---
             cb(r)
           }
 
           override fun onFailure(call: Call, e: IOException) {
-            val r = HttpRequestResult(
+            val r = HttpResult(
               exMessage = U.exAsString(e)
             )
             // ---
@@ -72,7 +70,7 @@ object TOkHttp {
           }
         })
     } catch (e: Exception) {
-      val result = HttpRequestResult(
+      val result = HttpResult(
         exMessage = U.exAsString(e)
       )
       cb(result)
