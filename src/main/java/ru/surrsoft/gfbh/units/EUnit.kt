@@ -12,10 +12,13 @@ enum class EUnit {
 
   //
   PASCAL,
+
   // hPa
-  H_PASCAL,
+  HECTO_PASCAL,
+
   // mmHg, мм.рт.ст
   MM_HG,
+
   // inHg, дюйм.рт.ст
   IN_HG,
 
