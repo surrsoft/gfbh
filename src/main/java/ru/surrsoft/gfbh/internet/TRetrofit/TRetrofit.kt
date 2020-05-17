@@ -11,25 +11,29 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
  * //new//
  */
 object TRetrofit {
-  /**
-   * For get result as String
-   */
-  fun build(baseURL: String): Retrofit {
-    return Retrofit.Builder()
-      .baseUrl(baseURL)
-      .addConverterFactory(ScalarsConverterFactory.create())
-      .client(OkHttpClient())
-      .build()
-  }
-
-  /**
-   * For convert result to "Object" through JSON
-   */
-  fun buildB(baseURL: String): Retrofit {
-    return Retrofit.Builder()
-      .baseUrl(baseURL)
-      .addConverterFactory(GsonConverterFactory.create())
-      .client(OkHttpClient())
-      .build()
-  }
+    /**
+     * Return Retrofit configurate variant.
+     * For get result as String
+     */
+    fun build(baseURL: String): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(baseURL)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .client(OkHttpClient())
+            .build()
+    }
+    
+    /**
+     * Return Retrofit configurate variant.
+     * For convert result to "Object" through JSON
+     */
+    fun buildB(baseURL: String): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(baseURL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient())
+            .build()
+    }
+  
+  
 }
